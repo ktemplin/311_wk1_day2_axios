@@ -7,12 +7,12 @@ const axios = require("axios")
 // api keys to github as it presents a security risk. It is done here only 
 // for practice purposes as we are sharing the same account
 const api_key = 'd771b19ef336ed8381def3a60b574464'
-const options = {
-  method: 'GET',
-  params: {language: 'en-US'},
-  headers: {accept: 'application/json'},
-  Authorization: 'Bearer d771b19ef336ed8381def3a60b574464'
-};
+// const options = {
+//   method: 'GET',
+//   params: {language: 'en-US'},
+//   headers: {accept: 'application/json'},
+//   Authorization: 'Bearer d771b19ef336ed8381def3a60b574464'
+// };
 
 const discoverMovie = () => {
   const url = `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}`
@@ -34,11 +34,16 @@ const getMovieById = async (movie_id) => {
 }
 // getMovieById()
 
-const getMovieByIdFailure = () => {
+const getMovieByIdFailure = async () => {
   const fakeId = 1 // FAKE ID HERE
   const url = `https://api.themoviedb.org/3/movie/${fakeId}?api_key=${api_key}`
   // code here
-
+  try {
+    const response = await axios.get(url);
+    return response.data; 
+  } catch (error) {
+    return status = 404;
+  }
 }
 
 
